@@ -16,7 +16,7 @@ public class WeeklyTimeRecord {
         this.weekStart = weekStart;
     }
 
-    public void validateDay(int day) {
+    private void validateDay(int day) {
         if (day > 7 || day < 1) {
             throw new IllegalArgumentException("Invalid day");
         }

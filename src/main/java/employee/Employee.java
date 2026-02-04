@@ -29,7 +29,7 @@ public class Employee {
         return employeeNumber;
     }
 
-    public String getFullName() {
+    public String getEmpName() {
         return suffix != null  && !suffix.isEmpty() ? firstName + " " + lastName + " " + suffix : firstName + " " + lastName;
     }
 
@@ -44,7 +44,7 @@ public class Employee {
 
     public void displayInfo() {
         System.out.println("Employee Number: " + getEmployeeNumber());
-        System.out.println("Full Name: " + getFullName());
+        System.out.println("Full Name: " + getEmpName());
         System.out.println("Birth Day: " + getBirthDay());
     }
 }
