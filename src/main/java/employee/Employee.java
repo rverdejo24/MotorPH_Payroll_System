@@ -5,20 +5,23 @@ import enums.EmploymentStatus;
 import java.time.LocalDate;
 
 public class Employee {
-    private int employeeNumber;
-    private String firstName;
+    private final int employeeNumber;
+    private final String firstName;
     private String lastName;
     private String suffix;
-    private LocalDate birthDay;
+    private final LocalDate birthDay;
     private double hourlyRate;
 
-    public Employee(int employeeNumber, String firstName, String lastName, String suffix, String birthDay, double hourlyRate) {
-        LocalDate birthday = LocalDate.parse(birthDay);
+    public Employee(int employeeNumber, String firstName, String lastName, String suffix, LocalDate birthDay, double hourlyRate) {
+        if (hourlyRate < 0) {
+            throw new IllegalArgumentException("Hourly Rate cannot be negative or zero.");
+        }
+
         this.employeeNumber = employeeNumber;
         this.firstName = firstName;
         this.lastName = lastName;
         this.suffix = suffix;
-        this.birthDay = birthday;
+        this.birthDay = birthDay;
         this.hourlyRate = hourlyRate;
     }
 

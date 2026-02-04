@@ -10,18 +10,25 @@ public class WeeklyTimeRecord {
     private int[] dailyHours = new int[7];
     private LocalDate weekStart;
 
-    public WeeklyTimeRecord(Employee employee, int[] dailyHours, String weekStart) {
-        LocalDate startDate = LocalDate.parse(weekStart);
+    public WeeklyTimeRecord(Employee employee, int[] dailyHours, LocalDate weekStart) {
         this.employee = employee;
-        this.dailyHours = dailyHours;
-        this.weekStart = startDate;
+        this.dailyHours = Arrays.copyOf(dailyHours, 7);
+        this.weekStart = weekStart;
+    }
+
+    public void validateDay(int day) {
+        if (day > 7 || day < 1) {
+            throw new IllegalArgumentException("Invalid day");
+        }
     }
 
     public void addDailyHours(int day, int hours) {
+        validateDay(day);
         dailyHours[day - 1] = hours;
     }
 
     public int getDailyHours(int day) {
+        validateDay(day);
         return dailyHours[day - 1];
     }
 
@@ -33,34 +40,24 @@ public class WeeklyTimeRecord {
     }
 
     public int getRegularHours() {
-        int[] regularHours = new int[7];
-        int index = 0;
+        int total = 0;
 
         for (int hours : dailyHours) {
-            regularHours[index] = Math.min(hours, 8);
-            index++;
+            total += Math.min(hours, 8);
         }
 
-        System.out.println(Arrays.toString(regularHours));
-
-        return Arrays.stream(regularHours).sum();
+        return total;
     }
 
     public int getOvertimeHours() {
-        int[] overtimeHours = new int[7];
-        int index = 0;
+        int total = 0;
 
         for (int hours : dailyHours) {
             if (hours > 8) {
-                overtimeHours[index] = hours - 8;
-            } else {
-                overtimeHours[index] = 0;
+                total += hours - 8;
             }
-            index++;
         }
 
-        System.out.println(Arrays.toString(overtimeHours));
-
-        return Arrays.stream(overtimeHours).sum();
+        return total;
     }
 }

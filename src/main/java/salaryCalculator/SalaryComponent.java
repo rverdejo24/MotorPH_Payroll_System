@@ -12,11 +12,9 @@ public abstract class SalaryComponent {
         return name;
     }
 
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
-
     public double getAmount() {
         return amount;
     }
+
+    public abstract void calculate(double baseSalary);
 }

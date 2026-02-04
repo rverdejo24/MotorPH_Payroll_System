@@ -8,11 +8,10 @@ public class Deduction extends SalaryComponent {
         this.rate = rate;
     }
 
-    public double calculateAmount(double salary) {
-        double deduction = rate * salary;
-        setAmount(deduction);
+    @Override
+    public void calculate(double salary) {
+        this.amount = rate * salary;
 
-        return getAmount();
     }
 
     public double getRate() {
