@@ -10,9 +10,11 @@ public class WeeklyTimeRecord {
     private int[] dailyHours = new int[7];
     private LocalDate weekStart;
 
-    public WeeklyTimeRecord(Employee employee, int[] dailyHours, LocalDate weekStart) {
+    public WeeklyTimeRecord(Employee employee, int[] dailyHours, String weekStart) {
+        LocalDate startDate = LocalDate.parse(weekStart);
         this.employee = employee;
         this.dailyHours = dailyHours;
+        this.weekStart = startDate;
     }
 
     public void addDailyHours(int day, int hours) {
