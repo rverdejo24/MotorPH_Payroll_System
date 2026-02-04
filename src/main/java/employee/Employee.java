@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 public class Employee {
     private final int employeeNumber;
-    private final String firstName;
+    private String firstName;
     private String lastName;
     private String suffix;
     private final LocalDate birthDay;
@@ -40,6 +40,18 @@ public class Employee {
 
     public double getHourlyRate() {
         return hourlyRate;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setSuffix(String suffix) {
+        this.suffix = suffix;
     }
 
     public void displayInfo() {
