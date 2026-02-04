@@ -54,6 +54,10 @@ public class Employee {
         this.suffix = suffix;
     }
 
+    public void setHourlyRate(double hourlyRate) {
+        this.hourlyRate = hourlyRate;
+    }
+
     public void displayInfo() {
         System.out.println("Employee Number: " + getEmployeeNumber());
         System.out.println("Full Name: " + getEmpName());
