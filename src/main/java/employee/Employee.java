@@ -2,37 +2,24 @@ package employee;
 
 import enums.EmploymentStatus;
 
+import java.time.LocalDate;
+
 public class Employee {
     private int employeeNumber;
     private String firstName;
     private String lastName;
     private String suffix;
-    private String birthDay;
-    private String address;
-    private String phoneNumber;
-    private String sss;
-    private String philHealth;
-    private String pagIbig;
-    private String tinNumber;
-    private EmploymentStatus status;
-    private String position;
-    private String immediateSupervisor;
-    
-    public Employee(int employeeNumber, String firstName, String lastName, String suffix, String birthDay, String address, String phoneNumber, String sss, String philHealth, String pagIbig, String tinNumber, EmploymentStatus status, String position, String immediateSupervisor) {
+    private LocalDate birthDay;
+    private double hourlyRate;
+
+    public Employee(int employeeNumber, String firstName, String lastName, String suffix, String birthDay, double hourlyRate) {
+        LocalDate birthday = LocalDate.parse(birthDay);
         this.employeeNumber = employeeNumber;
         this.firstName = firstName;
         this.lastName = lastName;
         this.suffix = suffix;
-        this.birthDay = birthDay;
-        this.address = address;
-        this.phoneNumber = phoneNumber;
-        this.sss = sss;
-        this.philHealth = philHealth;
-        this.pagIbig = pagIbig;
-        this.tinNumber = tinNumber;
-        this.status = status;
-        this.position = position;
-        this.immediateSupervisor = immediateSupervisor;
+        this.birthDay = birthday;
+        this.hourlyRate = hourlyRate;
     }
 
     public int getEmployeeNumber() {
@@ -44,43 +31,17 @@ public class Employee {
     }
 
 //    Need to refactor later to convert into date
-    public String getBirthDay() {
+    public LocalDate getBirthDay() {
         return birthDay;
     }
 
-    public String getAddress() {
-        return address;
+    public double getHourlyRate() {
+        return hourlyRate;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public String getSSS() {
-        return sss;
-    }
-
-    public String getPhilHealth() {
-        return philHealth;
-    }
-
-    public String getPagIbig() {
-        return pagIbig;
-    }
-
-    public String getTinNumber() {
-        return tinNumber;
-    }
-
-    public EmploymentStatus getStatus() {
-        return status;
-    }
-
-    public String getPosition() {
-        return position;
-    }
-
-    public String getImmediateSupervisor() {
-        return immediateSupervisor;
+    public void displayInfo() {
+        System.out.println("Employee Number: " + getEmployeeNumber());
+        System.out.println("Full Name: " + getFullName());
+        System.out.println("Birth Day: " + getBirthDay());
     }
 }
