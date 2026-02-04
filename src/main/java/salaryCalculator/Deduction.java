@@ -18,5 +18,8 @@ public class Deduction extends SalaryComponent {
         return rate;
     }
 
+    public void setRate(double rate) {
+        this.rate = rate;
+    }
 
 }
