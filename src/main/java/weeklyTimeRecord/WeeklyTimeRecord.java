@@ -7,13 +7,11 @@ import java.util.Arrays;
 
 public class WeeklyTimeRecord {
     private Employee employee;
-    private int[] dailyHours = new int[7];
-    private LocalDate weekStart;
+    private double[] dailyHours = new double[7];
 
-    public WeeklyTimeRecord(Employee employee, int[] dailyHours, LocalDate weekStart) {
+    public WeeklyTimeRecord(Employee employee, double[] dailyHours) {
         this.employee = employee;
         this.dailyHours = Arrays.copyOf(dailyHours, 7);
-        this.weekStart = weekStart;
     }
 
     private void validateDay(int day) {
@@ -22,42 +20,77 @@ public class WeeklyTimeRecord {
         }
     }
 
-    public void addDailyHours(int day, int hours) {
+    public void addDailyHours(int day, double hours) {
         validateDay(day);
         dailyHours[day - 1] = hours;
     }
 
-    public int getDailyHours(int day) {
+    public double getDailyHours(int day) {
         validateDay(day);
         return dailyHours[day - 1];
     }
 
-    public int getTotalHours() {
-        int regularHours = getRegularHours();
-        int overtimeHours = getOvertimeHours();
+    public double getTotalHours() {
+        double regularHours = getTotalRegularHours();
+        double overtimeHours = getTotalOvertimeHours();
 
         return regularHours + overtimeHours;
     }
 
-    public int getRegularHours() {
-        int total = 0;
+    public double getTotalRegularHours() {
+        double total = 0;
 
-        for (int hours : dailyHours) {
-            total += Math.min(hours, 8);
+        for (int i = 0; i < dailyHours.length; i++) {
+            // Skip Saturday (5) and Sunday (6)
+            if (i == 5 || i == 6) {
+                continue;
+            }
+
+            total += Math.min(dailyHours[i], 8);
         }
 
         return total;
     }
 
-    public int getOvertimeHours() {
-        int total = 0;
+    public double getTotalOvertimeHours() {
+        double total = 0;
 
-        for (int hours : dailyHours) {
-            if (hours > 8) {
-                total += hours - 8;
+        for (int i = 0; i < dailyHours.length; i++) {
+            if (i >= 5) {
+                total += dailyHours[i]; // weekend
+            } else {
+                total += Math.max(0, dailyHours[i] - 8); // weekday overtime only
             }
         }
 
         return total;
+    }
+
+    public double[] getWeeklyRegularHours() {
+        double[] regularWeeklyHours = new double[7];
+
+        for (int i = 0; i < dailyHours.length; i++) {
+            if (i == 5 || i == 6) {
+                regularWeeklyHours[i] = 0;
+            }
+
+            regularWeeklyHours[i] = Math.min(dailyHours[i], 8);
+        }
+
+        return regularWeeklyHours;
+    }
+
+    public double[] getWeeklyOvertimeHours() {
+        double[] overtimeWeeklyHours = new double[7];
+
+        for (int i = 0; i < dailyHours.length; i++) {
+            if (i >= 5) {
+                overtimeWeeklyHours[i] = dailyHours[i];
+            } else {
+                overtimeWeeklyHours[i] = Math.max(0, dailyHours[i] - 8);
+            }
+        }
+
+        return overtimeWeeklyHours;
     }
 }
